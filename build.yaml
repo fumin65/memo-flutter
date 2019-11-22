@@ -1,0 +1,7 @@
+targets:
+  $default:
+    builders:
+      inject_generator:
+        generate_for:
+          - lib/memo/di/**.dart
+          - lib/memo/di/**.summary

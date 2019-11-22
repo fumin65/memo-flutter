@@ -24,17 +24,24 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   floor: ^0.9.0
-  injectorio: ^1.0.3
   intl: ^0.15.7
   uuid: ^2.0.4
+  provider: ^3.1.0+1
+  inject:
+    path: ./inject_dart/package/inject
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   floor_generator: ^0.9.0
   build_runner: ^1.7.1
+  inject_generator:
+    path: ./inject_dart/package/inject_generator
 
-
+dependency_overrides:
+  quiver: "0.29.0+1"
+  collection: "1.14.6"
+  analyzer: "0.36.4"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

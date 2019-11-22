@@ -15,7 +15,7 @@ class FloorMemoRepository implements MemoRepository {
   Stream<List<Memo>> allMemos() {
     return _dao
         .allMemos()
-        .map((dtos) => dtos.map((dto) => _translator.toMemo(dto)));
+        .map((dtos) => dtos.map((dto) => _translator.toMemo(dto)).toList());
   }
 
   @override
