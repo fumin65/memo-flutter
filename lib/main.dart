@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:injectorio/injectorio.dart';
+import 'package:memo/memo/domain/memo/memo_repository.dart';
+import 'package:memo/memo/infra/di/infra_module.dart';
 
-void main() => runApp(MyApp());
+Future<void> main() async {
+  var infraModule = InfraModule();
+  infraModule.prepare();
+  debugPrint('aaaaa');
+  InjectorIO.start().module(infraModule);
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    MemoRepository repo = get();
+    var id = repo.newId();
+    print('id is ${id.value}');
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
