@@ -1,0 +1,3 @@
+[submodule "inject_dart"]
+	path = inject_dart
+	url = https://github.com/fumin65/inject.dart.git
