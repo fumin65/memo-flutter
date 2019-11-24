@@ -5,6 +5,7 @@ import 'package:memo/memo/di/app_component.dart';
 import 'package:memo/memo/domain/memo/memo.dart';
 import 'package:memo/memo/presen/injetable_route.dart';
 import 'package:memo/memo/presen/memo/memo_bloc.dart';
+import 'package:memo/memo/presen/memo/memo_edit_route.dart';
 import 'package:memo/memo/presen/memo/memo_registration_route.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +21,7 @@ class MemoListRoute extends InjectableStatelessRoute {
         appBar: AppBar(
           title: Text('Memo List'),
         ),
-        body: MemoList(),
+        body: MemoList(component),
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () {
@@ -36,14 +37,22 @@ class MemoListRoute extends InjectableStatelessRoute {
 }
 
 class MemoList extends StatefulWidget {
+  final AppComponent _component;
+
+  MemoList(this._component);
+
   @override
   State<StatefulWidget> createState() {
-    return _MemoListState();
+    return _MemoListState(_component);
   }
 }
 
 class _MemoListState extends State<MemoList> {
   static final _format = DateFormat('yyyy/MM/dd HH:mm:ss', 'ja_JP');
+
+  final AppComponent _component;
+
+  _MemoListState(this._component);
 
   @override
   Widget build(BuildContext context) {
@@ -63,11 +72,18 @@ class _MemoListState extends State<MemoList> {
               if (index.isOdd) {
                 return Divider();
               }
-              final i = index ~/ 2;
+              final i = snapshot.data.length - (index ~/ 2) - 1;
               final memo = snapshot.data[i];
               return ListTile(
                 title: Text(memo.title),
                 subtitle: Text(_format.format(memo.lastUpdatedAt)),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              MemoEditRoute(_component, memo.id.value)));
+                },
               );
             });
       },
