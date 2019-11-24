@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:memo/memo/di/app_component.dart';
 import 'package:memo/memo/domain/memo/memo.dart';
 import 'package:memo/memo/presen/injetable_route.dart';
@@ -42,6 +43,8 @@ class MemoList extends StatefulWidget {
 }
 
 class _MemoListState extends State<MemoList> {
+  static final _format = DateFormat('yyyy/MM/dd HH:mm:ss', 'ja_JP');
+
   @override
   Widget build(BuildContext context) {
     var bloc = Provider.of<MemoBloc>(context);
@@ -64,7 +67,7 @@ class _MemoListState extends State<MemoList> {
               final memo = snapshot.data[i];
               return ListTile(
                 title: Text(memo.title),
-                subtitle: Text(memo.lastUpdatedAt.toString()),
+                subtitle: Text(_format.format(memo.lastUpdatedAt)),
               );
             });
       },

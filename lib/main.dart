@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:memo/memo/di/app_component.dart';
 import 'package:memo/memo/di/app_module.dart';
 import 'package:memo/memo/di/infra_module.dart';
@@ -8,6 +9,9 @@ import 'package:memo/memo/presen/memo/memo_list_route.dart';
 Future<void> main() async {
   var component =
       await AppComponent.create(InfraModule(), AppModule(), PresenModule());
+
+  await initializeDateFormatting('ja_JP');
+
   runApp(MyApp(component));
 }
 
@@ -19,10 +23,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Memo App',
       theme: ThemeData(
-        primarySwatch: Colors.lightBlue,
-      ),
+          primarySwatch: Colors.lightBlue,
+          primaryIconTheme: IconThemeData(color: Colors.white),
+          accentIconTheme: IconThemeData(color: Colors.white),
+          primaryTextTheme: TextTheme(title: TextStyle(color: Colors.white))),
       home: MemoListRoute(_component),
     );
   }
