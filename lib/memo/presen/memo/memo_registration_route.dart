@@ -73,51 +73,62 @@ class _EditorState extends State<_Editor> {
               child: Icon(Icons.save),
               onPressed: state.saveButtonEnabled ? _onSaveButtonPressed : null,
             ),
-            body: Column(
+            body: Stack(
               children: <Widget>[
-                Container(
-                  padding: const EdgeInsets.all(16.0),
-                  child: TextField(
-                    controller: _titleController,
-                    autofocus: true,
-                    keyboardType: TextInputType.multiline,
-                    maxLines: null,
-                    textInputAction: TextInputAction.next,
-                    style: TextStyle(fontSize: 32, fontWeight: FontWeight.w700),
-                    decoration: InputDecoration.collapsed(
-                      hintText: 'タイトル',
-                      hintStyle:
-                          TextStyle(fontSize: 32, color: Colors.grey.shade400),
-                    ),
-                  ),
-                ),
-                Divider(),
-                Expanded(
-                  child: ListView(
-                    shrinkWrap: true,
-                    children: <Widget>[
-                      Container(
-                        padding: const EdgeInsets.all(16.0),
-                        child: TextField(
-                          controller: _contentController,
-                          keyboardType: TextInputType.multiline,
-                          minLines: 10,
-                          maxLines: null,
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w500),
-                          decoration: InputDecoration.collapsed(
-                            hintText: '内容',
-                            hintStyle: TextStyle(
-                                color: Colors.grey.shade400,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500),
-                            border: InputBorder.none,
-                          ),
+                Column(
+                  children: <Widget>[
+                    Container(
+                      padding: const EdgeInsets.all(16.0),
+                      child: TextField(
+                        controller: _titleController,
+                        autofocus: true,
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        enabled: !state.showsLoading,
+                        textInputAction: TextInputAction.next,
+                        style: TextStyle(
+                            fontSize: 32, fontWeight: FontWeight.w700),
+                        decoration: InputDecoration.collapsed(
+                          hintText: 'タイトル',
+                          hintStyle: TextStyle(
+                              fontSize: 32, color: Colors.grey.shade400),
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                    ),
+                    Divider(),
+                    Expanded(
+                      child: ListView(
+                        shrinkWrap: true,
+                        children: <Widget>[
+                          Container(
+                            padding: const EdgeInsets.all(16.0),
+                            child: TextField(
+                              controller: _contentController,
+                              enabled: !state.showsLoading,
+                              keyboardType: TextInputType.multiline,
+                              minLines: 10,
+                              maxLines: null,
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.w500),
+                              decoration: InputDecoration.collapsed(
+                                hintText: '内容',
+                                hintStyle: TextStyle(
+                                    color: Colors.grey.shade400,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500),
+                                border: InputBorder.none,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
+                Center(
+                  child:
+                      state.showsLoading ? CircularProgressIndicator() : null,
+                )
               ],
             ),
           );

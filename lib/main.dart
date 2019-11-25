@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:memo/memo/di/app_component.dart';
 import 'package:memo/memo/di/app_module.dart';
@@ -11,6 +12,9 @@ Future<void> main() async {
       await AppComponent.create(InfraModule(), AppModule(), PresenModule());
 
   await initializeDateFormatting('ja_JP');
+
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
   runApp(MyApp(component));
 }

@@ -67,7 +67,7 @@ class _MemoListState extends State<MemoList> {
         }
         return ListView.builder(
             padding: const EdgeInsets.all(16.0),
-            itemCount: snapshot.data.length * 2,
+            itemCount: snapshot.data.length * 2 - 1,
             itemBuilder: (context, index) {
               if (index.isOdd) {
                 return Divider();
