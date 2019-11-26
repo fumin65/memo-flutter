@@ -37,22 +37,18 @@ class MemoListRoute extends InjectableStatelessRoute {
 }
 
 class MemoList extends StatefulWidget {
-  final AppComponent _component;
+  final AppComponent component;
 
-  MemoList(this._component);
+  MemoList(this.component);
 
   @override
   State<StatefulWidget> createState() {
-    return _MemoListState(_component);
+    return _MemoListState();
   }
 }
 
 class _MemoListState extends State<MemoList> {
   static final _format = DateFormat('yyyy/MM/dd HH:mm:ss', 'ja_JP');
-
-  final AppComponent _component;
-
-  _MemoListState(this._component);
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +78,7 @@ class _MemoListState extends State<MemoList> {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              MemoEditRoute(_component, memo.id.value)));
+                              MemoEditRoute(widget.component, memo.id.value)));
                 },
               );
             });
