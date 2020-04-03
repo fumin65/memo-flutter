@@ -8,6 +8,7 @@ import 'package:memo/memo/di/presen_module.dart';
 import 'package:memo/memo/presen/memo/memo_list_route.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   var component =
       await AppComponent.create(InfraModule(), AppModule(), PresenModule());
 
